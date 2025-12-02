@@ -67,6 +67,22 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* NEW: Animated Gradient Text Styles */
+        .animate-gradient-text {
+            background: linear-gradient(to right, #14B8A6, #6D28D9, #F59E0B, #14B8A6);
+            background-size: 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient-shift 8s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
     </style>
 </head>
 <body class="font-body text-gray-800 antialiased selection:bg-muse-purple selection:text-white">
