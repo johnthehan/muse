@@ -11,7 +11,7 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Reverted to Montserrat and Open Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
     <!-- Configuration & Custom Styles -->
@@ -30,14 +30,15 @@
                     colors: {
                         muse: {
                             // NEW PALETTE: Indigo, Fuchsia, Cyan
-                            primary: '#4338ca',   // Deep Indigo (was Purple)
-                            secondary: '#c026d3', // Vibrant Fuchsia (was Teal)
-                            accent: '#06b6d4',    // Bright Cyan (was Yellow)
+                            primary: '#4338ca',   // Deep Indigo
+                            secondary: '#c026d3', // Vibrant Fuchsia
+                            accent: '#06b6d4',    // Bright Cyan
                             dark: '#111827',      // Slightly darker gray
                             light: '#F3F4F6'
                         }
                     },
                     fontFamily: {
+                        // Reverted Fonts
                         heading: ['Montserrat', 'sans-serif'],
                         body: ['Open Sans', 'sans-serif'],
                     }
@@ -65,7 +66,8 @@
         }
         
         .hero-bg {
-            background-image: linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.8)), url('https://images.unsplash.com/photo-1596496050844-3613e3364f77?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            /* Updated to use the star pattern image with a dark overlay for text readability */
+            background-image: linear-gradient(rgba(17, 24, 39, 0.85), rgba(17, 24, 39, 0.85)), url('https://scontent-lax3-2.xx.fbcdn.net/v/t1.15752-9/537605966_1368994728223082_3640460646991772593_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=0024fc&_nc_ohc=UcZWpTEvIK4Q7kNvwEtjYAh&_nc_oc=AdkA-KGs8AarL41oxUxPBcvgrjZgYkY2f-wMCJLpcDwAw54H7fRNX14IKW_Sy4yzODj_-0XBwW6CfvlPrO8A1zmq&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lax3-2.xx&oh=03_Q7cD4AGEFxu-SgCuwYEF5rMcFUiUO9mUAx-zqBqaKaOwcFQ-NA&oe=69561292');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -153,7 +155,8 @@
                 <span class="text-muse-secondary font-bold tracking-widest text-sm uppercase">Non-Profit Organization</span>
             </div>
             <h1 class="font-heading text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
-                Let Them Find Their <span class="animate-gradient-text">Muse</span>
+                Let Them Find Their<br>
+                <span class="animate-gradient-text">Muse</span>
             </h1>
             <p class="text-xl md:text-2xl mb-10 text-gray-200 font-light max-w-2xl mx-auto">
                 Promoting imagination and individual creative expression for the creators of tomorrow.
