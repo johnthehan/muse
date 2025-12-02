@@ -282,22 +282,22 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div>
                                 <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                                <input type="text" id="firstName" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-muse-purple focus:ring-2 focus:ring-muse-purple/20 outline-none transition" placeholder="Jane">
+                                <input type="text" id="firstName" name="firstName" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-muse-purple focus:ring-2 focus:ring-muse-purple/20 outline-none transition" placeholder="Jane">
                             </div>
                             <div>
                                 <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                                <input type="text" id="lastName" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-muse-purple focus:ring-2 focus:ring-muse-purple/20 outline-none transition" placeholder="Doe">
+                                <input type="text" id="lastName" name="lastName" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-muse-purple focus:ring-2 focus:ring-muse-purple/20 outline-none transition" placeholder="Doe">
                             </div>
                         </div>
 
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                            <input type="email" id="email" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-muse-purple focus:ring-2 focus:ring-muse-purple/20 outline-none transition" placeholder="jane@example.com">
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-muse-purple focus:ring-2 focus:ring-muse-purple/20 outline-none transition" placeholder="jane@example.com">
                         </div>
 
                         <div>
                             <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                            <select id="subject" class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-muse-purple focus:ring-2 focus:ring-muse-purple/20 outline-none transition">
+                            <select id="subject" name="subject" class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-muse-purple focus:ring-2 focus:ring-muse-purple/20 outline-none transition">
                                 <option>General Inquiry</option>
                                 <option>Student Enrollment</option>
                                 <option>Volunteering</option>
@@ -307,7 +307,7 @@
 
                         <div>
                             <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                            <textarea id="message" rows="4" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-muse-purple focus:ring-2 focus:ring-muse-purple/20 outline-none transition" placeholder="How can we help you find your muse?"></textarea>
+                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-muse-purple focus:ring-2 focus:ring-muse-purple/20 outline-none transition" placeholder="How can we help you find your muse?"></textarea>
                         </div>
 
                         <button type="submit" class="w-full bg-muse-purple text-white font-bold py-4 rounded-lg hover:bg-purple-800 transition shadow-lg flex justify-center items-center group">
@@ -322,6 +322,15 @@
                         <div>
                             <p class="font-bold">Message Sent!</p>
                             <p class="text-sm">Thank you for inquiring. We will get back to you shortly.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Error Message (Hidden by default) -->
+                    <div id="errorMessage" class="hidden mt-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-center">
+                        <i class="fas fa-exclamation-circle text-2xl mr-3"></i>
+                        <div>
+                            <p class="font-bold">Oops!</p>
+                            <p class="text-sm">Something went wrong. Please try again later.</p>
                         </div>
                     </div>
                 </div>
@@ -370,32 +379,64 @@
         });
 
         // Form Handling
-        function handleSubmit(e) {
+        async function handleSubmit(e) {
             e.preventDefault();
+            
+            // ---------------------------------------------------------
+            // TODO: PASTE YOUR FORMSPREE URL HERE
+            // Example: "https://formspree.io/f/xyzaabcd"
+            // ---------------------------------------------------------
+            const FORMSPREE_ENDPOINT = "https://formspree.io/f/mkgdbbld"; 
+
             const form = document.getElementById('inquiryForm');
             const button = form.querySelector('button');
             const successMsg = document.getElementById('successMessage');
+            const errorMsg = document.getElementById('errorMessage');
             
-            // Simulate loading
+            // UI Loading State
             const originalText = button.innerHTML;
             button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             button.disabled = true;
 
-            setTimeout(() => {
-                // Reset form and show success
-                form.reset();
+            try {
+                const response = await fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Success
+                    form.reset();
+                    form.style.display = 'none';
+                    successMsg.classList.remove('hidden');
+                    
+                    // Optional: Reset view after 5 seconds
+                    setTimeout(() => {
+                        successMsg.classList.add('hidden');
+                        form.style.display = 'block';
+                        form.classList.add('fade-in');
+                    }, 5000);
+                } else {
+                    // Service Error
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                // Network or Script Error
+                console.error("Error:", error);
+                errorMsg.classList.remove('hidden');
+                
+                // Hide error after 5 seconds
+                setTimeout(() => {
+                    errorMsg.classList.add('hidden');
+                }, 5000);
+            } finally {
+                // Restore button
                 button.innerHTML = originalText;
                 button.disabled = false;
-                form.style.display = 'none';
-                successMsg.classList.remove('hidden');
-                
-                // Reset view after 5 seconds
-                setTimeout(() => {
-                    successMsg.classList.add('hidden');
-                    form.style.display = 'block';
-                    form.classList.add('fade-in');
-                }, 5000);
-            }, 1500);
+            }
         }
     </script>
 </body>
