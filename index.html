@@ -16,7 +16,15 @@
 
     <!-- Configuration & Custom Styles -->
     <script>
+        // Check for saved theme preference immediately to prevent flash
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
         tailwind.config = {
+            darkMode: 'class', // Enable manual dark mode toggle
             theme: {
                 extend: {
                     colors: {
@@ -44,6 +52,9 @@
         }
         ::-webkit-scrollbar-track {
             background: #f1f1f1;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #1f2937;
         }
         ::-webkit-scrollbar-thumb {
             background: #4338ca; /* Primary */
@@ -87,26 +98,38 @@
         }
     </style>
 </head>
-<body class="font-body text-gray-800 antialiased selection:bg-muse-primary selection:text-white">
+<body class="font-body text-gray-800 dark:text-gray-100 bg-white dark:bg-gray-900 antialiased selection:bg-muse-primary selection:text-white transition-colors duration-300">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-md transition-all duration-300" id="navbar">
+    <nav class="fixed w-full z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-md transition-all duration-300 border-b border-transparent dark:border-gray-800" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <span class="font-heading font-extrabold text-3xl tracking-tighter text-muse-primary">M.U.S.E.</span>
+                    <span class="font-heading font-extrabold text-3xl tracking-tighter text-muse-primary dark:text-white">M.U.S.E.</span>
                 </div>
                 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#about" class="text-gray-600 hover:text-muse-primary font-semibold transition">Our Mission</a>
-                    <a href="#goals" class="text-gray-600 hover:text-muse-primary font-semibold transition">Goals</a>
+                    <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-muse-primary dark:hover:text-muse-accent font-semibold transition">Our Mission</a>
+                    <a href="#goals" class="text-gray-600 dark:text-gray-300 hover:text-muse-primary dark:hover:text-muse-accent font-semibold transition">Goals</a>
                     <a href="#inquire" class="px-5 py-2.5 bg-muse-primary text-white font-bold rounded-full hover:bg-indigo-800 transition shadow-lg transform hover:-translate-y-0.5">Inquire Now</a>
+                    
+                    <!-- Dark Mode Toggle Desktop -->
+                    <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-yellow-400 transition focus:outline-none">
+                        <i class="fas fa-moon dark:hidden text-xl"></i>
+                        <i class="fas fa-sun hidden dark:block text-xl"></i>
+                    </button>
                 </div>
 
                 <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-muse-primary focus:outline-none">
+                <div class="md:hidden flex items-center space-x-4">
+                    <!-- Dark Mode Toggle Mobile -->
+                    <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-yellow-400 transition focus:outline-none">
+                        <i class="fas fa-moon dark:hidden text-xl"></i>
+                        <i class="fas fa-sun hidden dark:block text-xl"></i>
+                    </button>
+
+                    <button id="mobile-menu-btn" class="text-gray-600 dark:text-gray-300 hover:text-muse-primary focus:outline-none">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
@@ -114,11 +137,11 @@
         </div>
 
         <!-- Mobile Menu Panel -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full">
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 absolute w-full transition-colors duration-300">
             <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
-                <a href="#about" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-muse-primary hover:bg-gray-50 rounded-md">Our Mission</a>
-                <a href="#goals" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-muse-primary hover:bg-gray-50 rounded-md">Goals</a>
-                <a href="#inquire" class="block px-3 py-3 text-base font-bold text-muse-primary hover:bg-indigo-50 rounded-md">Inquire Now</a>
+                <a href="#about" class="block px-3 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-muse-primary hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md">Our Mission</a>
+                <a href="#goals" class="block px-3 py-3 text-base font-medium text-gray-700 dark:text-gray-200 hover:text-muse-primary hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md">Goals</a>
+                <a href="#inquire" class="block px-3 py-3 text-base font-bold text-muse-primary dark:text-muse-accent hover:bg-indigo-50 dark:hover:bg-gray-800 rounded-md">Inquire Now</a>
             </div>
         </div>
     </nav>
@@ -153,7 +176,7 @@
     </header>
 
     <!-- About / Acronym Section -->
-    <section id="about" class="py-20 md:py-32 bg-white">
+    <section id="about" class="py-20 md:py-32 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="relative">
@@ -163,24 +186,24 @@
                 </div>
                 
                 <div>
-                    <h2 class="font-heading text-4xl font-bold text-gray-900 mb-6">
-                        Motivating <span class="text-muse-primary">Unique</span> Student Expression
+                    <h2 class="font-heading text-4xl font-bold text-gray-900 dark:text-white mb-6">
+                        Motivating <span class="text-muse-primary dark:text-muse-secondary">Unique</span> Student Expression
                     </h2>
-                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                    <p class="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                         At M.U.S.E., we believe that creativity is not just a skill, but a vital language for the youth. We provide a sanctuary for young minds to break free from the mold and explore their artistic identities.
                     </p>
-                    <p class="text-lg text-gray-600 mb-8 leading-relaxed border-l-4 border-muse-secondary pl-6 italic">
+                    <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed border-l-4 border-muse-secondary pl-6 italic">
                         "The youth is our future, let them find their muse."
                     </p>
                     
                     <div class="grid grid-cols-2 gap-6">
-                        <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg text-center">
-                            <i class="fas fa-palette text-3xl text-muse-primary mb-2"></i>
-                            <span class="font-bold text-gray-800">Artistic Freedom</span>
+                        <div class="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center transition-colors duration-300">
+                            <i class="fas fa-palette text-3xl text-muse-primary dark:text-muse-secondary mb-2"></i>
+                            <span class="font-bold text-gray-800 dark:text-white">Artistic Freedom</span>
                         </div>
-                        <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg text-center">
+                        <div class="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center transition-colors duration-300">
                             <i class="fas fa-lightbulb text-3xl text-muse-accent mb-2"></i>
-                            <span class="font-bold text-gray-800">Innovation</span>
+                            <span class="font-bold text-gray-800 dark:text-white">Innovation</span>
                         </div>
                     </div>
                 </div>
@@ -189,48 +212,48 @@
     </section>
 
     <!-- Goals Section -->
-    <section id="goals" class="py-20 bg-muse-light relative overflow-hidden">
+    <section id="goals" class="py-20 bg-muse-light dark:bg-gray-950 relative overflow-hidden transition-colors duration-300">
         <!-- Decorative blob -->
         <div class="absolute top-0 right-0 w-64 h-64 bg-muse-secondary opacity-10 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
         <div class="absolute bottom-0 left-0 w-64 h-64 bg-muse-primary opacity-10 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-16">
-                <h2 class="text-muse-primary font-bold tracking-wide uppercase text-sm mb-2">Our Vision</h2>
-                <h3 class="font-heading text-4xl md:text-5xl font-extrabold text-gray-900">Core Goals</h3>
+                <h2 class="text-muse-primary dark:text-muse-accent font-bold tracking-wide uppercase text-sm mb-2">Our Vision</h2>
+                <h3 class="font-heading text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white">Core Goals</h3>
                 <div class="w-24 h-1 bg-muse-accent mx-auto mt-4 rounded-full"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Goal 1 -->
-                <div class="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition transform hover:-translate-y-2 border-t-4 border-muse-primary">
-                    <div class="w-14 h-14 bg-muse-primary/10 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-infinity text-2xl text-muse-primary"></i>
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-t-4 border-muse-primary">
+                    <div class="w-14 h-14 bg-muse-primary/10 dark:bg-muse-primary/20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-infinity text-2xl text-muse-primary dark:text-muse-secondary"></i>
                     </div>
-                    <h4 class="font-heading text-xl font-bold mb-4 text-gray-800">Endless Possibilities</h4>
-                    <p class="text-gray-600 leading-relaxed">
+                    <h4 class="font-heading text-xl font-bold mb-4 text-gray-800 dark:text-white">Endless Possibilities</h4>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
                         To further allow our youth to explore the never-ending possibilities of their creative minds without boundaries or judgment.
                     </p>
                 </div>
 
                 <!-- Goal 2 -->
-                <div class="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition transform hover:-translate-y-2 border-t-4 border-muse-secondary">
-                    <div class="w-14 h-14 bg-muse-secondary/10 rounded-full flex items-center justify-center mb-6">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-t-4 border-muse-secondary">
+                    <div class="w-14 h-14 bg-muse-secondary/10 dark:bg-muse-secondary/20 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-fingerprint text-2xl text-muse-secondary"></i>
                     </div>
-                    <h4 class="font-heading text-xl font-bold mb-4 text-gray-800">Unique Expression</h4>
-                    <p class="text-gray-600 leading-relaxed">
+                    <h4 class="font-heading text-xl font-bold mb-4 text-gray-800 dark:text-white">Unique Expression</h4>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
                         Promoting imagination and individual creative expression, ensuring every student feels heard, seen, and valued for their unique perspective.
                     </p>
                 </div>
 
                 <!-- Goal 3 -->
-                <div class="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition transform hover:-translate-y-2 border-t-4 border-muse-accent">
-                    <div class="w-14 h-14 bg-muse-accent/10 rounded-full flex items-center justify-center mb-6">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-t-4 border-muse-accent">
+                    <div class="w-14 h-14 bg-muse-accent/10 dark:bg-muse-accent/20 rounded-full flex items-center justify-center mb-6">
                         <i class="fas fa-rocket text-2xl text-muse-accent"></i>
                     </div>
-                    <h4 class="font-heading text-xl font-bold mb-4 text-gray-800">Future Ready</h4>
-                    <p class="text-gray-600 leading-relaxed">
+                    <h4 class="font-heading text-xl font-bold mb-4 text-gray-800 dark:text-white">Future Ready</h4>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
                         Recognizing that the youth is our future, we equip them with the creative confidence needed to solve tomorrow's problems.
                     </p>
                 </div>
@@ -239,7 +262,7 @@
     </section>
 
     <!-- Inquire / Contact Section -->
-    <section id="inquire" class="py-20 md:py-32 bg-white">
+    <section id="inquire" class="py-20 md:py-32 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-muse-dark rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
                 
@@ -278,28 +301,28 @@
                 </div>
 
                 <!-- Inquiry Form -->
-                <div class="md:w-7/12 p-10 md:p-12 bg-white">
-                    <h3 class="font-heading text-2xl font-bold text-gray-800 mb-6">Send an Inquiry</h3>
+                <div class="md:w-7/12 p-10 md:p-12 bg-white dark:bg-gray-800 transition-colors duration-300">
+                    <h3 class="font-heading text-2xl font-bold text-gray-800 dark:text-white mb-6">Send an Inquiry</h3>
                     <form id="inquiryForm" onsubmit="handleSubmit(event)" class="space-y-6">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div>
-                                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                                <input type="text" id="firstName" name="firstName" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-muse-primary focus:ring-2 focus:ring-muse-primary/20 outline-none transition" placeholder="Jane">
+                                <label for="firstName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white focus:border-muse-primary focus:ring-2 focus:ring-muse-primary/20 outline-none transition" placeholder="Jane">
                             </div>
                             <div>
-                                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                                <input type="text" id="lastName" name="lastName" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-muse-primary focus:ring-2 focus:ring-muse-primary/20 outline-none transition" placeholder="Doe">
+                                <label for="lastName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white focus:border-muse-primary focus:ring-2 focus:ring-muse-primary/20 outline-none transition" placeholder="Doe">
                             </div>
                         </div>
 
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-muse-primary focus:ring-2 focus:ring-muse-primary/20 outline-none transition" placeholder="jane@example.com">
+                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white focus:border-muse-primary focus:ring-2 focus:ring-muse-primary/20 outline-none transition" placeholder="jane@example.com">
                         </div>
 
                         <div>
-                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                            <select id="subject" name="subject" class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-muse-primary focus:ring-2 focus:ring-muse-primary/20 outline-none transition">
+                            <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subject</label>
+                            <select id="subject" name="subject" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white focus:border-muse-primary focus:ring-2 focus:ring-muse-primary/20 outline-none transition">
                                 <option>General Inquiry</option>
                                 <option>Student Enrollment</option>
                                 <option>Volunteering</option>
@@ -308,8 +331,8 @@
                         </div>
 
                         <div>
-                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-muse-primary focus:ring-2 focus:ring-muse-primary/20 outline-none transition" placeholder="How can we help you find your muse?"></textarea>
+                            <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
+                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white focus:border-muse-primary focus:ring-2 focus:ring-muse-primary/20 outline-none transition" placeholder="How can we help you find your muse?"></textarea>
                         </div>
 
                         <button type="submit" class="w-full bg-muse-primary text-white font-bold py-4 rounded-lg hover:bg-indigo-800 transition shadow-lg flex justify-center items-center group">
@@ -319,7 +342,7 @@
                     </form>
 
                     <!-- Success Message (Hidden by default) -->
-                    <div id="successMessage" class="hidden mt-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-center">
+                    <div id="successMessage" class="hidden mt-6 p-4 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-300 rounded-lg flex items-center">
                         <i class="fas fa-check-circle text-2xl mr-3"></i>
                         <div>
                             <p class="font-bold">Message Sent!</p>
@@ -328,7 +351,7 @@
                     </div>
                     
                     <!-- Error Message (Hidden by default) -->
-                    <div id="errorMessage" class="hidden mt-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-center">
+                    <div id="errorMessage" class="hidden mt-6 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 rounded-lg flex items-center">
                         <i class="fas fa-exclamation-circle text-2xl mr-3"></i>
                         <div>
                             <p class="font-bold">Oops!</p>
@@ -341,7 +364,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
+    <footer class="bg-gray-900 dark:bg-black text-gray-400 py-12 border-t border-gray-800 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="font-heading text-2xl font-bold text-white mb-4">M.U.S.E.</h2>
             <p class="mb-8 max-w-lg mx-auto">Motivating Unique Student Expression. Empowering the youth to explore the never ending possibilities of their creative minds.</p>
@@ -355,6 +378,17 @@
     </footer>
 
     <script>
+        // Dark Mode Toggle Logic
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+
         // Mobile Menu Toggle
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
