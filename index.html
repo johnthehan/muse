@@ -477,6 +477,26 @@
                 button.disabled = false;
             }
         }
+        
+        // Easter Egg: Type 'hello' to redirect
+        let inputBuffer = '';
+        const secretWord = 'hello';
+        
+        document.addEventListener('keydown', (e) => {
+            // Only add single characters to buffer to avoid 'Enter', 'Shift', etc. messing it up too much
+            if (e.key.length === 1) {
+                inputBuffer += e.key.toLowerCase();
+            }
+            
+            // Keep buffer at right length
+            if (inputBuffer.length > secretWord.length) {
+                inputBuffer = inputBuffer.slice(-secretWord.length);
+            }
+            
+            if (inputBuffer === secretWord) {
+                window.location.href = 'https://andrewhan.dev';
+            }
+        });
     </script>
 </body>
 </html>
