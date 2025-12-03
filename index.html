@@ -8,8 +8,8 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- FontAwesome for Icons (Updated Link with Integrity/Crossorigin for better reliability) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <!-- Google Fonts: Reverted to Montserrat and Open Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -190,14 +190,23 @@
                 
                 <div>
                     <h2 class="font-heading text-4xl font-bold text-gray-900 dark:text-white mb-6">
-                        Motivating <span class="text-muse-primary dark:text-muse-secondary">Unique</span> Student Expression
+                        Motivative <span class="text-muse-primary dark:text-muse-secondary">Unique</span> Student Expression
                     </h2>
                     <p class="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                        At M.U.S.E., we believe that creativity is not just a skill, but a vital language for the youth. We provide a sanctuary for young minds to break free from the mold and explore their artistic identities.
+                        I created MUSE to unlock the full creative potential of our youth. In a digital world, it is vital to keep the next generation's minds open to endless artistic possibilities.
                     </p>
-                    <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed border-l-4 border-muse-secondary pl-6 italic">
-                        "The youth is our future, let them find their muse."
-                    </p>
+                    
+                    <!-- Motto -->
+                    <div class="mb-8">
+                        <p class="font-heading text-2xl font-bold italic text-muse-primary dark:text-muse-secondary leading-normal">
+                            “The Youth Is Our Future, Let Them Find Their MUSE”
+                        </p>
+                    </div>
+
+                    <div class="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed border-l-4 border-muse-secondary pl-6">
+                        <p class="font-bold mb-2 text-muse-primary dark:text-muse-accent">Our Mission</p>
+                        <p class="italic">"To bring diverse art forms to youth everywhere, fostering creative expression while strengthening essential skills like reading, listening, and motor coordination."</p>
+                    </div>
                     
                     <div class="grid grid-cols-2 gap-6">
                         <div class="flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center transition-colors duration-300">
@@ -278,16 +287,28 @@
                         </p>
                         
                         <div class="space-y-6">
+                            <!-- Address -->
                             <div class="flex items-start">
-                                <i class="fas fa-map-marker-alt mt-1 mr-4 text-muse-accent"></i>
+                                <!-- Changed: h-6 for line-height match, items-center for vertical center, justify-start for left align -->
+                                <div class="w-8 h-6 flex-shrink-0 flex items-center justify-start">
+                                    <i class="fas fa-location-dot text-muse-accent text-lg"></i>
+                                </div>
                                 <span>10535 Zelzah Ave,<br>Granada Hills, CA 91344</span>
                             </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-envelope mr-4 text-muse-accent"></i>
-                                <span>muse.your.imagination@gmail.com</span>
+                            
+                            <!-- Email -->
+                            <div class="flex items-start">
+                                <div class="w-8 h-6 flex-shrink-0 flex items-center justify-start">
+                                    <i class="fas fa-envelope text-muse-accent text-lg"></i>
+                                </div>
+                                <span class="break-all">muse.your.imagination@gmail.com</span>
                             </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-phone mr-4 text-muse-accent"></i>
+                            
+                            <!-- Phone -->
+                            <div class="flex items-start">
+                                <div class="w-8 h-6 flex-shrink-0 flex items-center justify-start">
+                                    <i class="fas fa-phone text-muse-accent text-lg"></i>
+                                </div>
                                 <span>(818) 923-8353<br>(818) 912-8870</span>
                             </div>
                         </div>
