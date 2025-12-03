@@ -34,7 +34,7 @@
                             secondary: '#F472B6', // Soft Pink
                             accent: '#34D399',    // Soft Mint/Teal
                             yellow: '#FCD34D',    // Soft Yellow
-                            dark: '#1F2937',      // Keep dark for contrast in dark mode
+                            dark: '#111827',      // Keep dark for contrast in dark mode
                             light: '#FDF2F8'      // Very light pinkish background
                         }
                     },
@@ -45,6 +45,13 @@
                     animation: {
                         'bounce-slow': 'bounce 3s infinite',
                         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
                     }
                 }
             }
@@ -69,7 +76,7 @@
             background: #f1f1f1;
         }
         .dark ::-webkit-scrollbar-track {
-            background: #1f2937;
+            background: #0f172a; /* Darker track for dark mode */
         }
         ::-webkit-scrollbar-thumb {
             background: #A78BFA; 
@@ -113,13 +120,12 @@
         /* Decorative Doodle Icons */
         .doodle-icon {
             position: absolute;
-            opacity: 0.15;
             pointer-events: none;
             z-index: 0;
         }
     </style>
 </head>
-<body class="font-body text-gray-800 dark:text-gray-100 bg-muse-light dark:bg-gray-900 antialiased selection:bg-muse-secondary selection:text-white transition-colors duration-300 overflow-x-hidden">
+<body class="font-body text-gray-800 dark:text-gray-100 bg-muse-light dark:bg-gray-950 antialiased selection:bg-muse-secondary selection:text-white transition-colors duration-300 overflow-x-hidden">
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm transition-all duration-300 border-b-2 border-muse-secondary/20 dark:border-gray-800" id="navbar">
@@ -166,13 +172,19 @@
 
     <!-- Hero Section -->
     <header class="hero-bg h-screen flex items-center justify-center text-center px-4 relative overflow-hidden">
-        <!-- Floating Doodle Icons -->
-        <i class="fas fa-star doodle-icon text-muse-yellow top-20 left-20 text-6xl animate-bounce-slow"></i>
-        <i class="fas fa-heart doodle-icon text-muse-secondary bottom-32 right-20 text-7xl animate-pulse-slow"></i>
-        <i class="fas fa-paint-brush doodle-icon text-muse-accent top-40 right-40 text-5xl animate-bounce-slow" style="animation-delay: 1s;"></i>
+        <!-- Floating Cute Doodles (SVG) -->
+        <svg class="doodle-icon top-20 left-20 w-24 h-24 text-muse-yellow animate-bounce-slow opacity-90" viewBox="0 0 100 100" fill="currentColor">
+            <path d="M50 0L61 35H98L68 57L79 91L50 70L21 91L32 57L2 35H39L50 0Z" style="stroke: white; stroke-width: 2; stroke-linejoin: round;"/>
+        </svg>
+        <svg class="doodle-icon bottom-32 right-20 w-28 h-28 text-muse-secondary animate-pulse-slow opacity-90" viewBox="0 0 100 100" fill="currentColor">
+            <path d="M50 88C50 88 15 65 15 35C15 15 35 10 50 30C65 10 85 15 85 35C85 65 50 88 50 88Z" style="stroke: white; stroke-width: 2;"/>
+        </svg>
+        <svg class="doodle-icon top-40 right-40 w-20 h-20 text-muse-accent animate-float opacity-90" viewBox="0 0 100 100" fill="currentColor" style="animation-delay: 1s;">
+            <path d="M30 70L70 30M30 70L20 80L30 90L40 80L30 70M70 30L80 20C85 15 90 20 85 25L75 35L70 30Z" style="stroke: white; stroke-width: 2; fill: none; stroke-linecap: round;"/>
+        </svg>
 
         <div class="max-w-4xl mx-auto text-white fade-in relative z-10">
-            <div class="inline-block mb-6 px-6 py-2 border-2 border-muse-yellow rounded-full bg-muse-yellow/20 backdrop-blur-sm transform -rotate-2">
+            <div class="inline-block mb-6 px-6 py-2 border-2 border-muse-yellow rounded-full bg-muse-yellow/20 backdrop-blur-sm transform -rotate-2 hover:rotate-2 transition duration-300">
                 <span class="text-muse-yellow font-bold tracking-widest text-sm uppercase flex items-center gap-2">
                     <i class="fas fa-child"></i> Non-Profit Organization
                 </span>
@@ -203,9 +215,15 @@
 
     <!-- About / Mission Section -->
     <section id="about" class="py-20 md:py-32 bg-white dark:bg-gray-900 transition-colors duration-300 relative overflow-hidden">
-        <!-- Decorative Doodles -->
-        <i class="fas fa-shapes doodle-icon text-muse-primary -top-10 -left-10 text-9xl opacity-5"></i>
-        <i class="fas fa-palette doodle-icon text-muse-secondary bottom-0 right-0 text-8xl opacity-5"></i>
+        <!-- Decorative Doodles: Squiggles and Palette -->
+        <svg class="doodle-icon -top-10 -left-10 w-64 h-64 text-muse-primary opacity-10 dark:opacity-20" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="3">
+            <path d="M20 100Q50 50 80 100T140 100T200 100" />
+            <path d="M10 120Q40 70 70 120T130 120T190 120" style="opacity: 0.5"/>
+            <circle cx="150" cy="50" r="20" fill="currentColor" style="opacity: 0.2"/>
+        </svg>
+        <svg class="doodle-icon bottom-0 right-0 w-64 h-64 text-muse-secondary opacity-10 dark:opacity-20" viewBox="0 0 200 200" fill="currentColor">
+            <path d="M100 20C60 20 20 50 20 100C20 150 60 180 100 180C115 180 130 175 140 160C145 150 140 140 130 140C120 140 115 135 115 130C115 125 120 120 125 120H140C160 120 180 100 180 80C180 50 150 20 100 20ZM60 60C55 60 50 55 50 50C50 45 55 40 60 40C65 40 70 45 70 50C70 55 65 60 60 60ZM90 50C85 50 80 45 80 40C80 35 85 30 90 30C95 30 100 35 100 40C100 45 95 50 90 50ZM120 60C115 60 110 55 110 50C110 45 115 40 120 40C125 40 130 45 130 50C130 55 125 60 120 60ZM140 90C135 90 130 85 130 80C130 75 135 70 140 70C145 70 150 75 150 80C150 85 145 90 140 90Z" />
+        </svg>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -254,13 +272,14 @@
                     </div>
                     
                     <div class="grid grid-cols-2 gap-6">
-                        <div class="flex flex-col items-center p-6 bg-muse-light dark:bg-gray-800 rounded-2xl text-center transition-colors duration-300 shadow-md hover:shadow-lg transform hover:scale-105 group">
+                        <!-- Cards have dark borders in dark mode for contrast -->
+                        <div class="flex flex-col items-center p-6 bg-muse-light dark:bg-gray-800 dark:border dark:border-gray-700 rounded-2xl text-center transition-colors duration-300 shadow-md hover:shadow-lg transform hover:scale-105 group">
                             <div class="w-16 h-16 bg-muse-primary/20 rounded-full flex items-center justify-center mb-4 group-hover:bg-muse-primary/30 transition">
                                 <i class="fas fa-palette text-4xl text-muse-primary dark:text-muse-secondary"></i>
                             </div>
                             <span class="font-heading font-bold text-xl text-gray-800 dark:text-white">Artistic Freedom</span>
                         </div>
-                        <div class="flex flex-col items-center p-6 bg-muse-light dark:bg-gray-800 rounded-2xl text-center transition-colors duration-300 shadow-md hover:shadow-lg transform hover:scale-105 group">
+                        <div class="flex flex-col items-center p-6 bg-muse-light dark:bg-gray-800 dark:border dark:border-gray-700 rounded-2xl text-center transition-colors duration-300 shadow-md hover:shadow-lg transform hover:scale-105 group">
                              <div class="w-16 h-16 bg-muse-accent/20 rounded-full flex items-center justify-center mb-4 group-hover:bg-muse-accent/30 transition">
                                 <i class="fas fa-lightbulb text-4xl text-muse-accent"></i>
                             </div>
@@ -273,12 +292,22 @@
     </section>
 
     <!-- Goals Section -->
-    <section id="goals" class="py-20 bg-muse-primary/10 dark:bg-gray-800 relative overflow-hidden transition-colors duration-300">
+    <!-- Background is darker in dark mode (gray-950) so cards (gray-800) pop -->
+    <section id="goals" class="py-20 bg-muse-primary/10 dark:bg-gray-950 relative overflow-hidden transition-colors duration-300">
         <!-- Decorative blobs and icons -->
         <div class="absolute top-0 right-0 w-80 h-80 bg-muse-secondary/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
         <div class="absolute bottom-0 left-0 w-80 h-80 bg-muse-accent/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
-        <i class="fas fa-paper-plane doodle-icon text-muse-primary top-10 left-10 text-7xl opacity-10 animate-bounce-slow"></i>
-        <i class="fas fa-puzzle-piece doodle-icon text-muse-secondary bottom-10 right-10 text-7xl opacity-10 animate-pulse-slow"></i>
+        
+        <!-- Paper Plane Doodle -->
+        <svg class="doodle-icon top-10 left-10 w-32 h-32 text-muse-primary opacity-10 animate-float dark:opacity-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
+            <path d="M10 50L90 10L60 90L45 60L10 50Z" stroke-linejoin="round"/>
+            <path d="M45 60L90 10" />
+        </svg>
+        
+        <!-- Puzzle Piece Doodle -->
+        <svg class="doodle-icon bottom-10 right-10 w-32 h-32 text-muse-secondary opacity-10 animate-float dark:opacity-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" style="animation-delay: 2s;">
+            <path d="M30 30H45C45 20 55 20 55 30H70V45C80 45 80 55 70 55V70H55C55 80 45 80 45 70H30V55C20 55 20 45 30 45V30Z" stroke-linejoin="round"/>
+        </svg>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-20">
@@ -291,7 +320,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <!-- Goal 1 -->
-                <div class="bg-white dark:bg-gray-700 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 border-t-8 border-muse-primary group relative overflow-hidden">
+                <div class="bg-white dark:bg-gray-800 dark:border dark:border-gray-700 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 border-t-8 border-muse-primary group relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 text-9xl text-muse-primary opacity-5 group-hover:rotate-12 transition"><i class="fas fa-infinity"></i></div>
                     <div class="w-20 h-20 bg-muse-primary/20 dark:bg-muse-primary/30 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition shadow-sm">
                         <i class="fas fa-infinity text-4xl text-muse-primary dark:text-white"></i>
@@ -303,7 +332,7 @@
                 </div>
 
                 <!-- Goal 2 -->
-                <div class="bg-white dark:bg-gray-700 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 border-t-8 border-muse-secondary group relative overflow-hidden">
+                <div class="bg-white dark:bg-gray-800 dark:border dark:border-gray-700 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 border-t-8 border-muse-secondary group relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 text-9xl text-muse-secondary opacity-5 group-hover:rotate-12 transition"><i class="fas fa-fingerprint"></i></div>
                     <div class="w-20 h-20 bg-muse-secondary/20 dark:bg-muse-secondary/30 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition shadow-sm">
                         <i class="fas fa-fingerprint text-4xl text-muse-secondary dark:text-white"></i>
@@ -315,7 +344,7 @@
                 </div>
 
                 <!-- Goal 3 -->
-                <div class="bg-white dark:bg-gray-700 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 border-t-8 border-muse-accent group relative overflow-hidden">
+                <div class="bg-white dark:bg-gray-800 dark:border dark:border-gray-700 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 border-t-8 border-muse-accent group relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 text-9xl text-muse-accent opacity-5 group-hover:rotate-12 transition"><i class="fas fa-rocket"></i></div>
                     <div class="w-20 h-20 bg-muse-accent/20 dark:bg-muse-accent/30 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition shadow-sm">
                         <i class="fas fa-rocket text-4xl text-muse-accent dark:text-white"></i>
@@ -331,9 +360,14 @@
 
     <!-- Inquire / Contact Section -->
     <section id="inquire" class="py-20 md:py-32 bg-white dark:bg-gray-900 transition-colors duration-300 relative">
-        <!-- Decorative Doodles -->
-        <i class="fas fa-envelope-open-text doodle-icon text-muse-primary top-20 left-20 text-8xl opacity-5"></i>
-        <i class="fas fa-comments doodle-icon text-muse-secondary bottom-20 right-20 text-8xl opacity-5"></i>
+        <!-- Decorative Doodles: Envelope and Speech Bubbles -->
+        <svg class="doodle-icon top-20 left-20 w-32 h-32 text-muse-primary opacity-5 dark:opacity-10" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
+            <rect x="10" y="20" width="80" height="60" rx="5" />
+            <path d="M10 20L50 50L90 20" />
+        </svg>
+        <svg class="doodle-icon bottom-20 right-20 w-32 h-32 text-muse-secondary opacity-5 dark:opacity-10" viewBox="0 0 100 100" fill="currentColor">
+            <path d="M20 20C20 10 30 10 30 10H70C70 10 80 10 80 20V60C80 70 70 70 70 70H40L20 90V70C20 70 10 70 10 60V20C10 20 20 20 20 20Z" style="fill-opacity: 0.3; stroke: currentColor; stroke-width: 3; stroke-linejoin: round;"/>
+        </svg>
         
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="bg-muse-dark rounded-[3rem] overflow-hidden shadow-2xl flex flex-col md:flex-row border-4 border-muse-light dark:border-gray-700">
@@ -456,8 +490,13 @@
 
     <!-- Footer -->
     <footer class="bg-gray-900 dark:bg-black text-gray-400 py-16 border-t-4 border-muse-primary transition-colors duration-300 relative overflow-hidden">
-        <i class="fas fa-star doodle-icon text-muse-yellow top-10 left-10 text-6xl opacity-10 animate-spin-slow"></i>
-        <i class="fas fa-heart doodle-icon text-muse-secondary bottom-10 right-10 text-6xl opacity-10 animate-pulse-slow"></i>
+        <!-- Footer Doodles -->
+        <svg class="doodle-icon top-10 left-10 w-24 h-24 text-muse-yellow opacity-10 animate-spin-slow dark:opacity-20" viewBox="0 0 100 100" fill="currentColor">
+            <path d="M50 0L61 35H98L68 57L79 91L50 70L21 91L32 57L2 35H39L50 0Z"/>
+        </svg>
+        <svg class="doodle-icon bottom-10 right-10 w-24 h-24 text-muse-secondary opacity-10 animate-pulse-slow dark:opacity-20" viewBox="0 0 100 100" fill="currentColor">
+            <path d="M50 88C50 88 15 65 15 35C15 15 35 10 50 30C65 10 85 15 85 35C85 65 50 88 50 88Z"/>
+        </svg>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <h2 class="font-heading text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-muse-primary to-muse-secondary mb-6 inline-block">M.U.S.E.</h2>
