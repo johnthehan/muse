@@ -31,7 +31,7 @@
                         muse: {
                             // NEW Pastel/Cute Palette
                             primary: '#A78BFA',   // Soft Purple
-                            secondary: '#F472B6', // Soft Pink
+                            secondary: '#A5B4FC', // Lighter Indigo
                             accent: '#34D399',    // Soft Mint/Teal
                             yellow: '#FCD34D',    // Soft Yellow
                             dark: '#111827',      // Keep dark for contrast in dark mode
@@ -46,11 +46,17 @@
                         'bounce-slow': 'bounce 3s infinite',
                         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'wiggle': 'wiggle 2s ease-in-out infinite',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-20px)' },
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-5deg)' },
+                            '50%': { transform: 'rotate(5deg)' },
                         }
                     }
                 }
@@ -88,7 +94,7 @@
         
         .hero-bg {
             /* Increased opacity for more pastel pop, using a gradient over an image */
-            background-image: linear-gradient(to bottom right, rgba(167, 139, 250, 0.85), rgba(244, 114, 182, 0.85)), url('https://scontent-lax3-2.xx.fbcdn.net/v/t1.15752-9/537605966_1368994728223082_3640460646991772593_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=0024fc&_nc_ohc=UcZWpTEvIK4Q7kNvwEtjYAh&_nc_oc=AdkA-KGs8AarL41oxUxPBcvgrjZgYkY2f-wMCJLpcDwAw54H7fRNX14IKW_Sy4yzODj_-0XBwW6CfvlPrO8A1zmq&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lax3-2.xx&oh=03_Q7cD4AGEFxu-SgCuwYEF5rMcFUiUO9mUAx-zqBqaKaOwcFQ-NA&oe=69561292');
+            background-image: linear-gradient(to bottom right, rgba(167, 139, 250, 0.85), rgba(165, 180, 252, 0.85)), url('https://scontent-lax3-2.xx.fbcdn.net/v/t1.15752-9/537605966_1368994728223082_3640460646991772593_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=0024fc&_nc_ohc=UcZWpTEvIK4Q7kNvwEtjYAh&_nc_oc=AdkA-KGs8AarL41oxUxPBcvgrjZgYkY2f-wMCJLpcDwAw54H7fRNX14IKW_Sy4yzODj_-0XBwW6CfvlPrO8A1zmq&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lax3-2.xx&oh=03_Q7cD4AGEFxu-SgCuwYEF5rMcFUiUO9mUAx-zqBqaKaOwcFQ-NA&oe=69561292');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -104,7 +110,7 @@
         }
 
         .animate-gradient-text {
-            background: linear-gradient(to right, #A78BFA, #F472B6, #34D399, #FCD34D, #A78BFA);
+            background: linear-gradient(to right, #A78BFA, #A5B4FC, #34D399, #FCD34D, #A78BFA);
             background-size: 300% auto;
             -webkit-background-clip: text;
             background-clip: text;
@@ -173,14 +179,17 @@
     <!-- Hero Section -->
     <header class="hero-bg h-screen flex items-center justify-center text-center px-4 relative overflow-hidden">
         <!-- Floating Cute Doodles (SVG) -->
-        <svg class="doodle-icon top-20 left-20 w-24 h-24 text-muse-yellow animate-bounce-slow opacity-90" viewBox="0 0 100 100" fill="currentColor">
-            <path d="M50 0L61 35H98L68 57L79 91L50 70L21 91L32 57L2 35H39L50 0Z" style="stroke: white; stroke-width: 2; stroke-linejoin: round;"/>
+        <svg class="doodle-icon top-20 left-20 w-24 h-24 text-muse-yellow animate-wiggle opacity-90" viewBox="0 0 100 100" fill="currentColor">
+            <!-- Cuter Star -->
+            <path d="M50 5L63 38H98L70 59L81 93L50 75L19 93L30 59L2 38H37L50 5Z" style="stroke: white; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round;"/>
         </svg>
         <svg class="doodle-icon bottom-32 right-20 w-28 h-28 text-muse-secondary animate-pulse-slow opacity-90" viewBox="0 0 100 100" fill="currentColor">
-            <path d="M50 88C50 88 15 65 15 35C15 15 35 10 50 30C65 10 85 15 85 35C85 65 50 88 50 88Z" style="stroke: white; stroke-width: 2;"/>
+            <!-- Cuter Heart -->
+            <path d="M50 88C50 88 15 65 15 35C15 15 35 10 50 30C65 10 85 15 85 35C85 65 50 88 50 88Z" style="stroke: white; stroke-width: 3; stroke-linecap: round;"/>
         </svg>
         <svg class="doodle-icon top-40 right-40 w-20 h-20 text-muse-accent animate-float opacity-90" viewBox="0 0 100 100" fill="currentColor" style="animation-delay: 1s;">
-            <path d="M30 70L70 30M30 70L20 80L30 90L40 80L30 70M70 30L80 20C85 15 90 20 85 25L75 35L70 30Z" style="stroke: white; stroke-width: 2; fill: none; stroke-linecap: round;"/>
+            <!-- Cuter Squiggle/Paintbrush -->
+            <path d="M20 80C20 80 40 60 40 40C40 20 60 20 60 40C60 60 80 80 80 80" style="stroke: white; stroke-width: 4; fill: none; stroke-linecap: round;"/>
         </svg>
 
         <div class="max-w-4xl mx-auto text-white fade-in relative z-10">
@@ -216,13 +225,13 @@
     <!-- About / Mission Section -->
     <section id="about" class="py-20 md:py-32 bg-white dark:bg-gray-900 transition-colors duration-300 relative overflow-hidden">
         <!-- Decorative Doodles: Squiggles and Palette -->
-        <svg class="doodle-icon -top-10 -left-10 w-64 h-64 text-muse-primary opacity-10 dark:opacity-20" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="3">
-            <path d="M20 100Q50 50 80 100T140 100T200 100" />
-            <path d="M10 120Q40 70 70 120T130 120T190 120" style="opacity: 0.5"/>
-            <circle cx="150" cy="50" r="20" fill="currentColor" style="opacity: 0.2"/>
+        <svg class="doodle-icon -top-10 -left-10 w-64 h-64 text-muse-primary opacity-10 dark:opacity-20 animate-wiggle" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="4" style="animation-duration: 4s;">
+            <path d="M30 100C50 50 100 50 120 100S170 150 190 100" stroke-linecap="round"/>
+            <circle cx="160" cy="60" r="15" fill="currentColor" style="opacity: 0.3"/>
         </svg>
-        <svg class="doodle-icon bottom-0 right-0 w-64 h-64 text-muse-secondary opacity-10 dark:opacity-20" viewBox="0 0 200 200" fill="currentColor">
-            <path d="M100 20C60 20 20 50 20 100C20 150 60 180 100 180C115 180 130 175 140 160C145 150 140 140 130 140C120 140 115 135 115 130C115 125 120 120 125 120H140C160 120 180 100 180 80C180 50 150 20 100 20ZM60 60C55 60 50 55 50 50C50 45 55 40 60 40C65 40 70 45 70 50C70 55 65 60 60 60ZM90 50C85 50 80 45 80 40C80 35 85 30 90 30C95 30 100 35 100 40C100 45 95 50 90 50ZM120 60C115 60 110 55 110 50C110 45 115 40 120 40C125 40 130 45 130 50C130 55 125 60 120 60ZM140 90C135 90 130 85 130 80C130 75 135 70 140 70C145 70 150 75 150 80C150 85 145 90 140 90Z" />
+        <svg class="doodle-icon bottom-0 right-0 w-64 h-64 text-muse-secondary opacity-10 dark:opacity-20 animate-pulse-slow" viewBox="0 0 200 200" fill="currentColor">
+            <!-- Cuter Palette -->
+            <path d="M100 30C60 30 30 60 30 100C30 140 60 170 100 170C120 170 135 160 145 145C150 135 145 125 135 125C125 125 120 120 120 115C120 110 125 105 130 105H145C165 105 180 90 180 70C180 50 160 30 130 30H100ZM65 75C60 75 55 70 55 65C55 60 60 55 65 55C70 55 75 60 75 65C75 70 70 75 65 75ZM100 65C95 65 90 60 90 55C90 50 95 45 100 45C105 45 110 50 110 55C110 60 105 65 100 65ZM135 75C130 75 125 70 125 65C125 60 130 55 135 55C140 55 145 60 145 65C145 70 140 75 135 75ZM155 105C150 105 145 100 145 95C145 90 150 85 155 85C160 85 165 90 165 95C165 100 160 105 155 105Z" />
         </svg>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -299,14 +308,16 @@
         <div class="absolute bottom-0 left-0 w-80 h-80 bg-muse-accent/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
         
         <!-- Paper Plane Doodle -->
-        <svg class="doodle-icon top-10 left-10 w-32 h-32 text-muse-primary opacity-10 animate-float dark:opacity-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
-            <path d="M10 50L90 10L60 90L45 60L10 50Z" stroke-linejoin="round"/>
-            <path d="M45 60L90 10" />
+        <svg class="doodle-icon top-10 left-10 w-32 h-32 text-muse-primary opacity-10 animate-wiggle dark:opacity-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" style="animation-duration: 3s;">
+            <!-- Cuter Paper Plane -->
+            <path d="M15 55L85 15L55 85L45 60L15 55Z" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M45 60L85 15" stroke-linecap="round"/>
         </svg>
         
         <!-- Puzzle Piece Doodle -->
-        <svg class="doodle-icon bottom-10 right-10 w-32 h-32 text-muse-secondary opacity-10 animate-float dark:opacity-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" style="animation-delay: 2s;">
-            <path d="M30 30H45C45 20 55 20 55 30H70V45C80 45 80 55 70 55V70H55C55 80 45 80 45 70H30V55C20 55 20 45 30 45V30Z" stroke-linejoin="round"/>
+        <svg class="doodle-icon bottom-10 right-10 w-32 h-32 text-muse-secondary opacity-10 animate-spin-slow dark:opacity-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" style="animation-delay: 1s; animation-duration: 10s;">
+            <!-- Cuter Puzzle Piece -->
+            <path d="M35 35H45C45 25 55 25 55 35H65V45C75 45 75 55 65 55V65H55C55 75 45 75 45 65H35V55C25 55 25 45 35 45V35Z" stroke-linejoin="round" stroke-linecap="round"/>
         </svg>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -361,12 +372,15 @@
     <!-- Inquire / Contact Section -->
     <section id="inquire" class="py-20 md:py-32 bg-white dark:bg-gray-900 transition-colors duration-300 relative">
         <!-- Decorative Doodles: Envelope and Speech Bubbles -->
-        <svg class="doodle-icon top-20 left-20 w-32 h-32 text-muse-primary opacity-5 dark:opacity-10" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
-            <rect x="10" y="20" width="80" height="60" rx="5" />
-            <path d="M10 20L50 50L90 20" />
+        <svg class="doodle-icon top-20 left-20 w-32 h-32 text-muse-primary opacity-5 dark:opacity-10 animate-wiggle" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" style="animation-duration: 3.5s;">
+            <!-- Cuter Envelope -->
+            <rect x="15" y="25" width="70" height="50" rx="8" stroke-linejoin="round"/>
+            <path d="M15 25L50 55L85 25" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <svg class="doodle-icon bottom-20 right-20 w-32 h-32 text-muse-secondary opacity-5 dark:opacity-10" viewBox="0 0 100 100" fill="currentColor">
-            <path d="M20 20C20 10 30 10 30 10H70C70 10 80 10 80 20V60C80 70 70 70 70 70H40L20 90V70C20 70 10 70 10 60V20C10 20 20 20 20 20Z" style="fill-opacity: 0.3; stroke: currentColor; stroke-width: 3; stroke-linejoin: round;"/>
+        <svg class="doodle-icon bottom-20 right-20 w-32 h-32 text-muse-secondary opacity-5 dark:opacity-10 animate-pulse-slow" viewBox="0 0 100 100" fill="currentColor">
+            <!-- Cuter Speech Bubbles -->
+            <path d="M30 30C30 20 40 20 40 20H70C70 20 80 20 80 30V60C80 70 70 70 70 70H50L30 85V70C20 70 30 70 30 60V30Z" style="fill-opacity: 0.4; stroke: currentColor; stroke-width: 4; stroke-linejoin: round;"/>
+            <path d="M15 50C15 45 20 45 20 45H45C45 45 50 45 50 50V70C50 75 45 75 45 75H35L20 85V75C15 75 15 75 15 70V50Z" style="fill-opacity: 0.4; stroke: currentColor; stroke-width: 4; stroke-linejoin: round;"/>
         </svg>
         
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -492,10 +506,12 @@
     <footer class="bg-gray-900 dark:bg-black text-gray-400 py-16 border-t-4 border-muse-primary transition-colors duration-300 relative overflow-hidden">
         <!-- Footer Doodles -->
         <svg class="doodle-icon top-10 left-10 w-24 h-24 text-muse-yellow opacity-10 animate-spin-slow dark:opacity-20" viewBox="0 0 100 100" fill="currentColor">
-            <path d="M50 0L61 35H98L68 57L79 91L50 70L21 91L32 57L2 35H39L50 0Z"/>
+            <!-- Cuter Star -->
+            <path d="M50 5L63 38H98L70 59L81 93L50 75L19 93L30 59L2 38H37L50 5Z" style="stroke: white; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round;"/>
         </svg>
         <svg class="doodle-icon bottom-10 right-10 w-24 h-24 text-muse-secondary opacity-10 animate-pulse-slow dark:opacity-20" viewBox="0 0 100 100" fill="currentColor">
-            <path d="M50 88C50 88 15 65 15 35C15 15 35 10 50 30C65 10 85 15 85 35C85 65 50 88 50 88Z"/>
+            <!-- Cuter Heart -->
+            <path d="M50 88C50 88 15 65 15 35C15 15 35 10 50 30C65 10 85 15 85 35C85 65 50 88 50 88Z" style="stroke: white; stroke-width: 3; stroke-linecap: round;"/>
         </svg>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -616,6 +632,9 @@
         let inputBuffer = '';
         const secretWord = 'hello';
         document.addEventListener('keydown', (e) => {
+            // Guard clause for missing key property
+            if (!e.key) return;
+
             if (e.key.length === 1) {
                 inputBuffer += e.key.toLowerCase();
             }
